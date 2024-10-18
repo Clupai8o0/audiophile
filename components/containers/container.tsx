@@ -1,9 +1,11 @@
 import { BaseWrapperProps } from "@/lib/props";
 import clsx from "clsx";
 
-interface Props extends BaseWrapperProps {}
+interface Props extends BaseWrapperProps {
+	background?: React.ReactNode;
+}
 
-const Container = ({ className, children, id, parentClassName }: Props) => {
+const Container = ({ className, children, id, parentClassName, background }: Props) => {
 	return (
 		<section
 			className={clsx(
@@ -12,6 +14,7 @@ const Container = ({ className, children, id, parentClassName }: Props) => {
 			)}
 			id={id}
 		>
+			{background}
 			<div
 				className={clsx(
 					"flex flex-col relative z-10 max-w-7xl w-full",

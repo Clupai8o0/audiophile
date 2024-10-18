@@ -1,11 +1,10 @@
 import clsx from "clsx";
+import Link from "next/link";
+
 import { BaseProps } from "@/lib/props";
 import {
 	Sheet,
 	SheetContent,
-	SheetDescription,
-	SheetHeader,
-	SheetTitle,
 	SheetTrigger,
 } from "../ui/sheet";
 
@@ -25,16 +24,16 @@ const Sidebar = ({ className }: Props) => {
 					<div>
 						<ul className="flex flex-col items-start h6 gap-4">
 							<li className="hover:text-[var(--fm-primary)] cursor-pointer">
-								Home
+								<Link href="/">Home</Link>
 							</li>
 							<li className="hover:text-[var(--fm-primary)] cursor-pointer">
-								Headphones
+								<Link href="/category/headphones">Headphones</Link>
 							</li>
 							<li className="hover:text-[var(--fm-primary)] cursor-pointer">
-								Speakers
+								<Link href="/category/speakers">Speakers</Link>
 							</li>
 							<li className="hover:text-[var(--fm-primary)] cursor-pointer">
-								Earphones
+								<Link href="/category/earphones">Earphones</Link>
 							</li>
 						</ul>
 					</div>

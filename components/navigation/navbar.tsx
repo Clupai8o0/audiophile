@@ -1,6 +1,8 @@
+import clsx from "clsx";
+import Link from "next/link";
+
 import { BaseProps } from "@/lib/props";
 import Sidebar from "./sidebar";
-import clsx from "clsx";
 
 interface Props extends BaseProps {}
 
@@ -29,10 +31,18 @@ const Navbar = ({ className }: Props) => {
 
 			<div className="hidden lg:block">
 				<ul className="flex sub-title text-white gap-9">
-					<li className="hover:text-[var(--fm-primary)] cursor-pointer">Home</li>
-					<li className="hover:text-[var(--fm-primary)] cursor-pointer">Headphones</li>
-					<li className="hover:text-[var(--fm-primary)] cursor-pointer">Speakers</li>
-					<li className="hover:text-[var(--fm-primary)] cursor-pointer">Earphones</li>
+					<li className="hover:text-[var(--fm-primary)] cursor-pointer">
+						<Link href="/">Home</Link>
+					</li>
+					<li className="hover:text-[var(--fm-primary)] cursor-pointer">
+						<Link href="/category/headphones">Headphones</Link>
+					</li>
+					<li className="hover:text-[var(--fm-primary)] cursor-pointer">
+						<Link href="/category/speakers">Speakers</Link>
+					</li>
+					<li className="hover:text-[var(--fm-primary)] cursor-pointer">
+						<Link href="/category/earphones">Earphones</Link>
+					</li>
 				</ul>
 			</div>
 

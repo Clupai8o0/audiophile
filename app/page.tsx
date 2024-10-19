@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Navbar from "@/components/navigation/navbar";
 
 import Button from "@/components/content/button";
@@ -54,6 +56,79 @@ function HomePage() {
 				{categories.map((category) => (
 					<Category {...category} key={generateKey()} />
 				))}
+			</Container>
+
+			{/* SPEAKER - ZX9 */}
+			<Container
+				className="mt-24 bg-[var(--fm-primary)] text-white px-6 py-16 flex flex-col lg:flex-row items-center text-center rounded-lg relative"
+				parentClassName="px-6"
+			>
+				<div className="relative flex justify-center w-full h-full mb-8 lg:w-1/2">
+					<img
+						src="/home/mobile/image-speaker-zx9.png"
+						alt="zx9 speaker"
+						className="w-1/2 relative z-[5] md:hidden"
+					/>
+					<img
+						src="/home/tablet/image-speaker-zx9.png"
+						alt="zx9 speaker"
+						className="w-1/4 relative z-[5] hidden md:block lg:hidden"
+					/>
+					<img
+						src="/home/desktop/image-speaker-zx9.png"
+						alt="zx9 speaker"
+						className="w-[60%] absolute -bottom-1/4 z-[5] hidden lg:block"
+					/>
+
+					<img
+						src="/home/desktop/pattern-circles.svg"
+						alt="circular patterns"
+						className="absolute -top-3/4 md:-top-[150%] lg:-top-1/4 -left-1/4 md:-left-[12.5%] lg:-left-1/4 z-[4] max-w-none w-[150%] md:w-[125%] lg:w-[150%]"
+					/>
+				</div>
+
+				<div className="max-w-sm lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left lg:ml-12 lg:my-16 relative z-10">
+					<h2 className="h2 md:h1">ZX9 Speaker</h2>
+					<p className="opacity-75 mt-4">
+						Upgrade to premium speakers that are phenomenally built to deliver
+						truly remarkable sound.
+					</p>
+					<Link href="/product/zx9-speaker">
+						<Button variant="secondary-reverse" className="mt-8 md:mt-10">
+							See Product
+						</Button>
+					</Link>
+				</div>
+			</Container>
+
+			{/* SPEAKER - ZX7 */}
+			<Container
+				className="mt-12 px-6 overflow-hidden rounded-lg"
+				parentClassName="px-6"
+			>
+				<div className="w-full h-full">
+					<img
+						src="/home/mobile/image-speaker-zx7.jpg"
+						alt="speaker zx7"
+						className="w-full h-full absolute top-0 left-0 object-cover z-0 md:hidden"
+					/>
+					<img
+						src="/home/tablet/image-speaker-zx7.jpg"
+						alt="speaker zx7"
+						className="w-full h-full absolute top-0 left-0 object-cover z-0 hidden md:block lg:hidden"
+					/>
+					<img
+						src="/home/desktop/image-speaker-zx7.jpg"
+						alt="speaker zx7"
+						className="w-full h-full absolute top-0 left-0 object-cover z-0 hidden lg:block"
+					/>
+				</div>
+				<div className="flex flex-col gap-8 relative z-10 my-24 md:ml-12">
+					<h2 className="h3 md:h2">ZX7 Speaker</h2>
+					<Link href="/product/zx7-speaker">
+						<Button variant="secondary">SEE PRODUCT</Button>
+					</Link>
+				</div>
 			</Container>
 		</main>
 	);

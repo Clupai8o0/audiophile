@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { BaseComponentProps } from "@/lib/props";
 
 interface Props extends BaseComponentProps {
-	variant?: "primary" | "secondary" | "tertiary";
+	variant?: "primary" | "secondary" | "secondary-reverse" | "tertiary";
 }
 
 const Button = ({ className, children, variant }: Props) => {
@@ -13,7 +13,8 @@ const Button = ({ className, children, variant }: Props) => {
 				(!variant || variant === "primary") &&
 					"bg-[var(--fm-primary)] hover:bg-[var(--fm-primary-foreground)] text-white",
 				variant === "secondary" &&
-					"bg-white border border-black hover:bg-black hover:text-white",
+					"border border-black hover:bg-black hover:text-white",
+				variant === "secondary-reverse" && "bg-black text-white border border-black hover:bg-transparent",
 				variant === "tertiary" &&
 					"bg-transparent border-none hover:text-[var(--fm-primary)] flex gap-4 items-center opacity-50",
 				className

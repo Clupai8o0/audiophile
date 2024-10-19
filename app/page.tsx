@@ -50,7 +50,7 @@ function HomePage() {
 			</Container>
 
 			{/* CATEGORIES */}
-			<Container className="flex flex-col items-center px-6 mt-8 gap-4">
+			<Container className="flex flex-col items-center px-6 mt-8 gap-4 lg:gap-6 md:flex-row">
 				{categories.map((category) => (
 					<Category {...category} key={generateKey()} />
 				))}

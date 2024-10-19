@@ -130,6 +130,33 @@ function HomePage() {
 					</Link>
 				</div>
 			</Container>
+
+			{/* EARPHONES - YX1 */}
+			<Container className="mt-12 px-6 lg:px-0 flex flex-col md:flex-row gap-6">
+				<div className="rounded-lg overflow-hidden h-60 md:h-72 w-full relative md:w-1/2">
+					<img
+						src="/home/mobile/image-earphones-yx1.jpg"
+						alt="Earphones yx1"
+						className="mobile absolute w-full h-full object-cover"
+					/>
+					<img
+						src="/home/tablet/image-earphones-yx1.jpg"
+						alt="Earphones yx1"
+						className="tablet absolute w-full h-full object-cover"
+					/>
+					<img
+						src="/home/desktop/image-earphones-yx1.jpg"
+						alt="Earphones yx1"
+						className="desktop absolute w-full h-full object-cover"
+					/>
+				</div>
+				<div className="rounded-lg overflow-hidden bg-[var(--fm-foreground)] py-16 px-6 lg:px-12 flex flex-col justify-center gap-6 md:w-1/2">
+					<h2 className="h3 md:h2">YX1 Earphones</h2>
+					<Link href="/product/yx1-earphones">
+						<Button variant="secondary">See Product</Button>
+					</Link>
+				</div>
+			</Container>
 		</main>
 	);
 }

@@ -124,7 +124,7 @@ function HomePage() {
 					/>
 				</div>
 				<div className="flex flex-col gap-8 relative z-10 my-24 md:ml-12">
-					<h2 className="h3 md:h2">ZX7 Speaker</h2>
+					<h2 className="h3">ZX7 Speaker</h2>
 					<Link href="/product/zx7-speaker">
 						<Button variant="secondary">SEE PRODUCT</Button>
 					</Link>
@@ -151,10 +151,32 @@ function HomePage() {
 					/>
 				</div>
 				<div className="rounded-lg overflow-hidden bg-[var(--fm-foreground)] py-16 px-6 lg:px-12 flex flex-col justify-center gap-6 md:w-1/2">
-					<h2 className="h3 md:h2">YX1 Earphones</h2>
+					<h2 className="h3">YX1 Earphones</h2>
 					<Link href="/product/yx1-earphones">
 						<Button variant="secondary">See Product</Button>
 					</Link>
+				</div>
+			</Container>
+
+			{/* BEST GEAR */}
+			<Container className="mt-12 px-6 lg:px-0 flex flex-col lg:flex-row-reverse items-center lg:justify-between gap-8 lg:gap-0">
+				<div className="lg:w-1/2">
+					<img src="/shared/mobile/image-best-gear.jpg" alt="man with earphones" className="mobile w-full h-full object-cover rounded-lg" />
+					<img src="/shared/tablet/image-best-gear.jpg" alt="man with earphones" className="tablet w-full h-full object-cover rounded-lg" />
+					<img src="/shared/desktop/image-best-gear.jpg" alt="man with earphones" className="desktop w-full h-full object-cover rounded-lg" />
+				</div>
+				<div className="text-center flex flex-col lg:items-start gap-4 max-w-xl lg:w-1/2 lg:text-left lg:gap-8 lg:max-w-lg">
+					<h2 className="h3 md:h2">
+						Bringing you the <span className="text-[var(--fm-primary)]">best</span> audio gear
+					</h2>
+					<p className="opacity-50">
+						Located at the heart of New York City, Audiophile is the premier
+						store for high end headphones, earphones, speakers, and audio
+						accessories. We have a large showroom and luxury demonstration rooms
+						available for you to browse and experience a wide range of our
+						products. Stop by our store to meet some of the fantastic people who
+						make Audiophile the best place to buy your portable audio equipment.
+					</p>
 				</div>
 			</Container>
 		</main>

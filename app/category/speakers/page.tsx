@@ -4,6 +4,7 @@ import Category from "@/components/content/category";
 import Navbar from "@/components/navigation/navbar";
 import { categories } from "@/lib/data";
 import { generateKey } from "@/lib/utils";
+import Link from "next/link";
 
 function CategorySpeaker() {
 	return (
@@ -42,7 +43,9 @@ function CategorySpeaker() {
 						-- creating new possibilities for more pleasing and practical audio
 						setups.
 					</p>
-					<Button>SEE PRODUCT</Button>
+					<Link href="/product/zx9-speaker">
+						<Button>SEE PRODUCT</Button>
+					</Link>
 				</div>
 			</Container>
 
@@ -72,7 +75,9 @@ function CategorySpeaker() {
 						represents the top of the line powered speakers for home or studio
 						use.
 					</p>
-					<Button>SEE PRODUCT</Button>
+					<Link href="/product/zx7-speaker">
+						<Button>SEE PRODUCT</Button>
+					</Link>
 				</div>
 			</Container>
 

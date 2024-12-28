@@ -4,6 +4,7 @@ import Category from "@/components/content/category";
 import Navbar from "@/components/navigation/navbar";
 import { categories } from "@/lib/data";
 import { generateKey } from "@/lib/utils";
+import Link from "next/link";
 
 function CategoryEarphones() {
 	return (
@@ -42,7 +43,9 @@ function CategoryEarphones() {
 						even in noisy environments with its active noise cancellation
 						feature.
 					</p>
-					<Button>SEE PRODUCT</Button>
+					<Link href="/product/yx1-earphones">
+						<Button>SEE PRODUCT</Button>
+					</Link>
 				</div>
 			</Container>
 

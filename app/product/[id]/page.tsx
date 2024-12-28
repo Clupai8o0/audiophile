@@ -10,7 +10,7 @@ import Category from "@/components/content/category";
 import Container from "@/components/containers/container";
 
 import { categories, Product as ProductType } from "@/lib/data";
-import { generateKey } from "@/lib/utils";
+import { addCommas, generateKey } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 function Product() {
@@ -77,10 +77,14 @@ function Product() {
 						<h1 className="h3 md:h2 max-w-md">{product?.name}</h1>
 						<p className="opacity-50 max-w-xl">{product?.desc}</p>
 						<span className="h6 font-bold tracking-[1.3px]">
-							$ {product?.price}
+							$ {addCommas(product?.price)}
 						</span>
 						<div className="flex items-center gap-4">
-							<Counter />
+							<Counter
+								initialCount={1}
+								addCount={() => {}}
+								removeCount={() => {}}
+							/>
 							<Button>ADD TO CART</Button>
 						</div>
 					</div>
@@ -90,14 +94,16 @@ function Product() {
 					<div className="space-y-4 lg:w-2/3 lg:pr-24">
 						<h1 className="h4 md:h3">Features</h1>
 						{product?.features.split("\n\n").map((feature) => (
-							<p className="opacity-50">{feature}</p>
+							<p className="opacity-50" key={generateKey()}>
+								{feature}
+							</p>
 						))}
 					</div>
 					<div className="space-y-6 md:space-y-0 md:flex md:flex-row lg:w-1/3 lg:flex-col lg:space-y-6">
 						<h1 className="h4 md:h3 md:w-1/2 lg:w-full">IN THE BOX</h1>
 						<ul className="space-y-2 md:w-1/2 lg:w-full">
 							{product?.includes.map(({ quantity, item }) => (
-								<li className="flex items-center gap-4">
+								<li className="flex items-center gap-4" key={generateKey()}>
 									<span className="text-[var(--fm-primary)] font-bold">
 										{quantity}x
 									</span>
@@ -164,17 +170,12 @@ function Product() {
 					<h1 className="h4 md:h3">YOU MAY ALSO LIKE</h1>
 					<div className="flex flex-col md:flex-row gap-8">
 						{product?.otherProducts.map(({ image, name, slug }) => (
-							<div className="flex flex-col items-center gap-4">
-								<img
-									src={image.mobile}
-									alt=""
-									className="mobile rounded-lg"
-								/>
-								<img
-									src={image.tablet}
-									alt=""
-									className="tablet rounded-lg"
-								/>
+							<div
+								className="flex flex-col items-center gap-4"
+								key={generateKey()}
+							>
+								<img src={image.mobile} alt="" className="mobile rounded-lg" />
+								<img src={image.tablet} alt="" className="tablet rounded-lg" />
 								<img
 									src={image.desktop}
 									alt=""

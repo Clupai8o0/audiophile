@@ -1,24 +1,25 @@
 import clsx from "clsx";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-import { BaseProps } from "@/lib/props";
 import Sidebar from "./sidebar";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
-	DialogPortal,
 	DialogTitle,
 	DialogTrigger,
 } from "../ui/dialog";
-import { useCartStore } from "@/lib/state";
 import Button from "../content/button";
 import Counter from "../content/counter";
-import { use, useEffect, useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+
+import { BaseProps } from "@/lib/props";
+import { useCartStore } from "@/lib/state";
 import { products as allProducts } from "@/lib/data";
 import { addCommas, generateKey } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface Props extends BaseProps {}
 
@@ -31,13 +32,15 @@ interface CartItemState {
 }
 
 const Navbar = ({ className }: Props) => {
+	const router = useRouter();
+
 	const products = useCartStore((state) => state.products);
 	const addProduct = useCartStore((state) => state.addProduct);
 	const removeProduct = useCartStore((state) => state.removeProduct);
 	const clearCart = useCartStore((state) => state.clearCart);
 
 	const [finalCart, setFinalCart] = useState<CartItemState[]>([]);
-	const [totalPrice, setTotalPrice] = useState(0)
+	const [totalPrice, setTotalPrice] = useState(0);
 
 	useEffect(() => {
 		const previewCart: CartItemState[] = [];
@@ -59,7 +62,10 @@ const Navbar = ({ className }: Props) => {
 	}, [products]);
 
 	useEffect(() => {
-		const total = finalCart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+		const total = finalCart.reduce(
+			(acc, curr) => acc + curr.price * curr.quantity,
+			0
+		);
 		setTotalPrice(total);
 	}, [finalCart]);
 
@@ -104,16 +110,19 @@ const Navbar = ({ className }: Props) => {
 
 			<div>
 				<Dialog>
-					<DialogTrigger>
+					<DialogTrigger className="md:hidden block">
 						<img src="/shared/desktop/icon-cart.svg" alt="" />
 					</DialogTrigger>
-					<DialogContent className="lg:left-[75%] lg:top-36">
+					<DialogContent className="max-w-sm">
 						<DialogHeader>
 							<div className="flex flex-row justify-between items-start pt-4">
 								<DialogTitle className="h4">
 									CART ({finalCart.length})
 								</DialogTitle>
-								<button className="opacity-50 hover:underline" onClick={clearCart}>
+								<button
+									className="opacity-50 hover:underline"
+									onClick={clearCart}
+								>
 									Remove all Items
 								</button>
 							</div>
@@ -135,7 +144,9 @@ const Navbar = ({ className }: Props) => {
 											/>
 											<div className="flex flex-col items-start max-w-28">
 												<h2 className="sub-title truncate w-full">{name}</h2>
-												<p className="font-bold opacity-50">$ {addCommas(price)}</p>
+												<p className="font-bold opacity-50">
+													$ {addCommas(price)}
+												</p>
 											</div>
 											<Counter
 												initialCount={quantity}
@@ -147,16 +158,76 @@ const Navbar = ({ className }: Props) => {
 								</div>
 							)}
 						</DialogHeader>
-						<DialogFooter className="flex-col space-y-6">
-							<div className="flex justify-between">
+						<DialogFooter className="flex-col sm:flex-col space-y-6 w-full">
+							<div className="flex justify-between w-full">
 								<span className="opacity-50">TOTAL</span>
 								<span className="h6 font-bold">$ {addCommas(totalPrice)}</span>
 							</div>
 
-							<Button>CHECKOUT</Button>
+							<Button disabled={finalCart.length === 0}>CHECKOUT</Button>
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
+
+				<Popover>
+					<PopoverTrigger className="hidden md:block">
+						<img src="/shared/desktop/icon-cart.svg" alt="" />
+					</PopoverTrigger>
+					<PopoverContent className="w-[500px] mt-6" align="end">
+						<div className="flex flex-col gap-4 p-6">
+							<div className="flex flex-row justify-between items-start">
+								<h2 className="h4">CART ({finalCart.length})</h2>
+								<button
+									className="opacity-50 hover:underline"
+									onClick={clearCart}
+								>
+									Remove all Items
+								</button>
+							</div>
+
+							{products.length === 0 ? (
+								<div className="flex items-center justify-center">
+									<h2 className="text-lg opacity-40">Your cart is empty</h2>
+								</div>
+							) : (
+								<div className="flex flex-col gap-4">
+									{finalCart.map(({ img, name, price, quantity, slug }) => (
+										<div
+											className="flex justify-between items-center gap-4"
+											key={generateKey()}
+										>
+											<img
+												src={img}
+												className="w-20 h-20 rounded-lg object-cover"
+											/>
+											<div className="flex flex-col items-start max-w-28">
+												<h2 className="sub-title truncate w-full">{name}</h2>
+												<p className="font-bold opacity-50">
+													$ {addCommas(price)}
+												</p>
+											</div>
+											<Counter
+												initialCount={quantity}
+												addCount={() => addProduct(slug)}
+												removeCount={() => removeProduct(slug)}
+											/>
+										</div>
+									))}
+								</div>
+							)}
+							<div className="flex justify-between w-full">
+								<span className="opacity-50">TOTAL</span>
+								<span className="h6 font-bold">$ {addCommas(totalPrice)}</span>
+							</div>
+							<Button
+								disabled={finalCart.length === 0}
+								onClick={() => router.push("/checkout")}
+							>
+								CHECKOUT
+							</Button>
+						</div>
+					</PopoverContent>
+				</Popover>
 			</div>
 		</nav>
 	);

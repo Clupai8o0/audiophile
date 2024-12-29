@@ -12,6 +12,7 @@ import Container from "@/components/containers/container";
 import { categories, Product as ProductType } from "@/lib/data";
 import { addCommas, generateKey } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { useCartStore } from "@/lib/state";
 
 function Product() {
 	const router = useRouter();
@@ -19,6 +20,10 @@ function Product() {
 	const slug = pathname.split("/").pop();
 
 	const [product, setProduct] = useState<ProductType | null>(null);
+
+	const addProduct = useCartStore((state) => state.addProduct);
+	const [numberOfProductsToAdd, setNumberOfProductsToAdd] = useState(1);
+	const [productBeingAdded, setProductBeingAdded] = useState(false);
 
 	const handleLoadData = async () => {
 		const resp = await fetch(`/api/product/${slug}`);
@@ -33,6 +38,14 @@ function Product() {
 	useEffect(() => {
 		handleLoadData();
 	}, []);
+	
+	useEffect(() => {
+		if (productBeingAdded) {
+			setTimeout(() => {
+				setProductBeingAdded(false);
+			}, 2000);
+		}
+	}, [productBeingAdded])
 
 	return (
 		<main className="space-y-4 md:space-y-8">
@@ -82,10 +95,21 @@ function Product() {
 						<div className="flex items-center gap-4">
 							<Counter
 								initialCount={1}
-								addCount={() => {}}
-								removeCount={() => {}}
+								addCount={() => setNumberOfProductsToAdd((prev) => prev + 1)}
+								removeCount={() => setNumberOfProductsToAdd((prev) => prev - 1)}
+								disableRemoveBoundary
 							/>
-							<Button>ADD TO CART</Button>
+							<Button
+								onClick={() => {
+									setProductBeingAdded(true);
+									for (let i = 0; i < numberOfProductsToAdd; i++) {
+										addProduct(slug || "");
+									}
+								}}
+								disabled={productBeingAdded}
+							>
+								{!productBeingAdded ? "ADD TO CART" : "ADDED"}
+							</Button>
 						</div>
 					</div>
 				</Container>

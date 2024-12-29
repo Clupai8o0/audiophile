@@ -3,9 +3,11 @@ import { BaseComponentProps } from "@/lib/props";
 
 interface Props extends BaseComponentProps {
 	variant?: "primary" | "secondary" | "secondary-reverse" | "tertiary";
+	onClick?: () => void;
+	disabled?: boolean;
 }
 
-const Button = ({ className, children, variant }: Props) => {
+const Button = ({ className, disabled, onClick, children, variant }: Props) => {
 	return (
 		<button
 			className={clsx(
@@ -19,6 +21,8 @@ const Button = ({ className, children, variant }: Props) => {
 					"bg-transparent border-none hover:text-[var(--fm-primary)] flex gap-4 items-center opacity-50",
 				className
 			)}
+			onClick={onClick}
+			disabled={disabled}
 		>
 			{children}
 			{variant === "tertiary" && (
